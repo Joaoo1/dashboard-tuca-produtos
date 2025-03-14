@@ -15,6 +15,9 @@ function generateSalesPDF(list) {
       address: `${sale.client.street}, ${sale.client.complement}.`,
       neighborhood: sale.client.neighborhood,
       clientPhone: sale.client.phone,
+      products: sale.products.map(product => {
+        return `${product.quantity}x ${product.name} - R$ ${product.price.toFixed(2)}`;
+      }).join('\n\n'),
     };
 
     return formattedSale;
@@ -48,6 +51,7 @@ function generateSalesPDF(list) {
         'Rua',
         'Bairro',
         'Telefone',
+        'Produtos'
       ],
     ],
     body: [...ordenedListByClientName],
